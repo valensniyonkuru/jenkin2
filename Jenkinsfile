@@ -20,8 +20,8 @@ pipeline {
             steps {
                 script {
                     // Stops and removes the container if it's already running to avoid name conflicts
-                    sh 'docker stop my_nginx_container || true'
-                    sh 'docker rm my_nginx_container || true'
+                    sh 'docker stop webcontainer || true'
+                    sh 'docker rm webcontainer || true'
                 }
             }
         }
