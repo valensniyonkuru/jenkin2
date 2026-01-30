@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #1f2937;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    margin: 0;
+}
+
+.card {
+    background-color: white;
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    color: #2563eb;
+}
+
+.pipeline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.step {
+    background-color: #2563eb;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.arrow {
+    margin: 0 10px;
+    font-size: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #e5e7eb;
+}
