@@ -21,7 +21,7 @@ pipeline {
                 script {
                     // login in dockerhub
                     sh 'docker login -u valensniyonkuru -p 1234567890'
-                    
+                    sh 'docker push valensniyonkuru/ci_cd_web'
                 }
             }
         }
