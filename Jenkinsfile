@@ -26,11 +26,14 @@ pipeline {
             }
         }
 
-        // stage('Docker Run') {
-        //     steps {
-        //         // Runs your newly built container on port 8080
-        //         sh 'docker run -d -p 8081:80 --name webcontainer ci_cd_web'
-        //     }
-        // }
+      sshagent(['0a550b1c-a900-4177-885b-afe8cc7ac0ce']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no root@69.62.125.52"
+                            
+                            cd /srv/applications &&
+                            git run -p 8082:80 valensniyonkuru/ci_cd_web:latest 
+                        "
+                    '''
+                }
     }
 }
