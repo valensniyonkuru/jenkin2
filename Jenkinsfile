@@ -1,42 +1,30 @@
 pipeline {
     agent any
-
     stages {
         stage('Checkout') {
             steps {
-                // Jenkins usually does this automatically if using "Pipeline from SCM"
                 checkout scm
             }
         }
-
         stage('Docker Build') {
             steps {
-                // Builds the image using the command you just verified
-                sh 'docker build -t valensniyonkuru/ci_cd_web .'
+                sh 'docker build -t ci/cd_web .'
             }
         }
-
-        stage('login Dockerhub') {
+        stage('Cleanup Old Container') {
             steps {
                 script {
-                    // login in dockerhub
-                    sh 'docker login -u valensniyonkuru -p 1234567890'
-                    sh 'docker push valensniyonkuru/ci_cd_web'
+                    // MUST match the name used in the 'Run' stage below
+                    sh 'docker stop webcontainer || true'
+                    sh 'docker rm webcontainer || true'
                 }
             }
         }
-
-        stage('Deploy via SSH') {
+        stage('Docker Run') {
             steps {
-                sshagent(['0a550b1c-a900-4177-885b-afe8cc7ac0ce']) {
-                    sh '''
-                        ssh -o StrictHostKeyChecking=no root@69.62.125.52"
-
-                            cd /srv/applications &&
-                            git run -p 8082:80 valensniyonkuru/ci_cd_web:latest
-                        "
-                    '''
-                }}
+                // Mapping container port 80 to host port 8081
+                sh 'docker run -d -p 8081:80 --name webcontainer ci/cd_web'
             }
         }
     }
+}
