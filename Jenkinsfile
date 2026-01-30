@@ -26,14 +26,17 @@ pipeline {
             }
         }
 
-      sshagent(['0a550b1c-a900-4177-885b-afe8cc7ac0ce']) {
+        stage('Deploy via SSH') {
+            steps {
+                sshagent(['0a550b1c-a900-4177-885b-afe8cc7ac0ce']) {
                     sh '''
                         ssh -o StrictHostKeyChecking=no root@69.62.125.52"
-                            
+
                             cd /srv/applications &&
-                            git run -p 8082:80 valensniyonkuru/ci_cd_web:latest 
+                            git run -p 8082:80 valensniyonkuru/ci_cd_web:latest
                         "
                     '''
-                }
+                }}
+            }
+        }
     }
-}
