@@ -12,25 +12,25 @@ pipeline {
         stage('Docker Build') {
             steps {
                 // Builds the image using the command you just verified
-                sh 'docker build -t ci/cd_web .'
+                sh 'docker build -t valensniyonkuru/ci_cd_web .'
             }
         }
 
-        stage('Cleanup Old Container') {
+        stage('login Dockerhub') {
             steps {
                 script {
-                    // Stops and removes the container if it's already running to avoid name conflicts
-                    sh 'docker stop webcontainer || true'
-                    sh 'docker rm webcontainer || true'
+                    // login in dockerhub
+                    sh 'docker login -u valensniyonkuru -p 1234567890'
+                    
                 }
             }
         }
 
-        stage('Docker Run') {
-            steps {
-                // Runs your newly built container on port 8080
-                sh 'docker run -d -p 8081:80 --name webcontainer ci/cd_web'
-            }
-        }
+        // stage('Docker Run') {
+        //     steps {
+        //         // Runs your newly built container on port 8080
+        //         sh 'docker run -d -p 8081:80 --name webcontainer ci_cd_web'
+        //     }
+        // }
     }
 }
